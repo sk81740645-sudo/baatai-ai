@@ -2,18 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>BaatAI - AI Assistant</title>
 
 <meta name="description"
-      content="BaatAI is a fast AI assistant for chatting, studying, coding, writing and everyday questions.">
-
-<link rel="icon" type="image/png">
+content="BaatAI is a fast AI assistant for chatting, studying, coding, writing and everyday questions.">
 
 <style>
+
 *{
     margin:0;
     padding:0;
@@ -28,32 +25,24 @@ html,body{
 }
 
 body{
-    background:#061014;
     color:#fff;
-}
-
-/* ================= BACKGROUND VIDEO ================= */
-
-#bgVideo{
-    position:fixed;
-    inset:0;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    z-index:-3;
-}
-
-.video-overlay{
-    position:fixed;
-    inset:0;
     background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(0,180,200,.18),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 70%,
+            rgba(0,100,130,.16),
+            transparent 35%
+        ),
         linear-gradient(
             135deg,
-            rgba(0,10,15,.88),
-            rgba(0,30,35,.68),
-            rgba(0,0,0,.88)
+            #02090d,
+            #061a20,
+            #02090d
         );
-    z-index:-2;
 }
 
 /* ================= APP ================= */
@@ -69,16 +58,26 @@ body{
 .sidebar{
     width:280px;
     height:100%;
-    background:rgba(3,18,23,.82);
+    flex-shrink:0;
+
+    background:rgba(3,18,23,.90);
+
     backdrop-filter:blur(20px);
     -webkit-backdrop-filter:blur(20px);
+
     border-right:1px solid rgba(255,255,255,.10);
+
     display:flex;
     flex-direction:column;
+
     padding:18px;
+
     transition:.3s;
+
     z-index:20;
 }
+
+/* BRAND */
 
 .logo-area{
     display:flex;
@@ -87,22 +86,33 @@ body{
     margin-bottom:25px;
 }
 
-.logo-area img{
+.logo-circle{
     width:52px;
     height:52px;
-    object-fit:contain;
-    border-radius:14px;
-}
 
-.brand{
+    border-radius:15px;
+
     display:flex;
-    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #00d9e8,
+            #006c79
+        );
+
+    font-size:25px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,210,230,.25);
 }
 
 .brand-name{
     font-size:23px;
     font-weight:800;
-    letter-spacing:.5px;
 }
 
 .brand-sub{
@@ -111,18 +121,35 @@ body{
     margin-top:2px;
 }
 
+/* BUTTONS */
+
 .new-chat{
     width:100%;
+
     padding:14px;
+
     border:none;
     border-radius:14px;
-    background:linear-gradient(135deg,#00b8c8,#007b88);
-    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #00b8c8,
+            #007b88
+        );
+
+    color:#fff;
+
     font-size:15px;
     font-weight:bold;
+
     cursor:pointer;
-    box-shadow:0 8px 25px rgba(0,200,220,.20);
+
     margin-bottom:12px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,200,220,.18);
 }
 
 .new-chat:active{
@@ -131,25 +158,39 @@ body{
 
 .clear-btn{
     width:100%;
+
     padding:11px;
-    border:1px solid rgba(255,255,255,.10);
+
+    border:1px solid
+    rgba(255,255,255,.10);
+
     border-radius:12px;
-    background:rgba(255,255,255,.05);
+
+    background:
+        rgba(255,255,255,.05);
+
     color:#ddd;
+
     cursor:pointer;
+
     margin-bottom:18px;
 }
 
 .section-title{
     font-size:11px;
+
     color:#7e9ba0;
+
     letter-spacing:1.5px;
+
     margin:5px 5px 10px;
 }
 
 .history{
     flex:1;
+
     overflow-y:auto;
+
     padding-right:3px;
 }
 
@@ -158,40 +199,64 @@ body{
 }
 
 .history::-webkit-scrollbar-thumb{
-    background:rgba(255,255,255,.15);
+    background:
+        rgba(255,255,255,.15);
+
     border-radius:10px;
 }
 
 .history-item{
     padding:12px;
+
     border-radius:11px;
+
     margin-bottom:6px;
-    background:rgba(255,255,255,.035);
+
+    background:
+        rgba(255,255,255,.035);
+
     color:#ddd;
+
     font-size:13px;
+
     cursor:pointer;
+
     white-space:nowrap;
+
     overflow:hidden;
+
     text-overflow:ellipsis;
 }
 
 .history-item:hover{
-    background:rgba(255,255,255,.08);
+    background:
+        rgba(255,255,255,.08);
 }
 
 .bottom-controls{
-    border-top:1px solid rgba(255,255,255,.08);
+    border-top:
+        1px solid
+        rgba(255,255,255,.08);
+
     padding-top:14px;
+
     margin-top:12px;
 }
 
 .theme-btn{
     width:100%;
+
     padding:12px;
+
     border:none;
+
     border-radius:12px;
-    background:rgba(255,255,255,.06);
+
+    background:
+        rgba(255,255,255,.06);
+
     color:#fff;
+
     cursor:pointer;
 }
 
@@ -199,9 +264,13 @@ body{
 
 .main{
     flex:1;
+
     min-width:0;
+
     height:100%;
+
     display:flex;
+
     flex-direction:column;
 }
 
@@ -209,38 +278,73 @@ body{
 
 .header{
     height:70px;
+
+    flex-shrink:0;
+
     display:flex;
+
     align-items:center;
-    justify-content:space-between;
+
     padding:0 22px;
-    background:rgba(3,15,19,.55);
+
+    background:
+        rgba(3,15,19,.75);
+
     backdrop-filter:blur(15px);
-    border-bottom:1px solid rgba(255,255,255,.08);
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.08);
 }
 
 .header-left{
     display:flex;
+
     align-items:center;
+
     gap:12px;
 }
 
 .mobile-menu{
     display:none;
+
     width:42px;
     height:42px;
+
     border:none;
+
     border-radius:12px;
-    background:rgba(255,255,255,.07);
+
+    background:
+        rgba(255,255,255,.07);
+
     color:#fff;
+
     font-size:20px;
+
     cursor:pointer;
 }
 
-.header-logo{
-    width:38px;
-    height:38px;
-    border-radius:10px;
-    object-fit:contain;
+.header-logo-circle{
+    width:40px;
+    height:40px;
+
+    border-radius:12px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #00d9e8,
+            #006c79
+        );
+
+    font-size:20px;
 }
 
 .header-title{
@@ -254,12 +358,16 @@ body{
     margin-top:2px;
 }
 
-/* ================= CHAT AREA ================= */
+/* ================= CHAT ================= */
 
 .chat-area{
     flex:1;
+
     overflow-y:auto;
-    padding:25px 5%;
+
+    padding:
+        25px 5%;
+
     scroll-behavior:smooth;
 }
 
@@ -268,7 +376,9 @@ body{
 }
 
 .chat-area::-webkit-scrollbar-thumb{
-    background:rgba(255,255,255,.12);
+    background:
+        rgba(255,255,255,.12);
+
     border-radius:10px;
 }
 
@@ -276,61 +386,105 @@ body{
 
 .welcome{
     min-height:100%;
+
     display:flex;
+
     flex-direction:column;
+
     justify-content:center;
+
     align-items:center;
+
     text-align:center;
+
     padding:30px 10px;
 }
 
-.welcome-logo{
-    width:105px;
-    height:105px;
-    object-fit:contain;
-    border-radius:25px;
+.welcome-icon{
+    width:100px;
+    height:100px;
+
+    border-radius:28px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:50px;
+
     margin-bottom:20px;
-    filter:drop-shadow(0 10px 30px rgba(0,210,230,.25));
+
+    background:
+        linear-gradient(
+            135deg,
+            #00d9e8,
+            #006c79
+        );
+
+    box-shadow:
+        0 15px 45px
+        rgba(0,210,230,.20);
 }
 
 .welcome h1{
     font-size:34px;
+
     margin-bottom:8px;
 }
 
 .welcome p{
     color:#9fb7bb;
+
     max-width:600px;
+
     line-height:1.6;
 }
 
 .suggestions{
     display:flex;
+
     flex-wrap:wrap;
+
     justify-content:center;
+
     gap:10px;
+
     margin-top:25px;
 }
 
 .suggestion{
     padding:11px 15px;
-    border:1px solid rgba(255,255,255,.10);
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+
     border-radius:20px;
-    background:rgba(255,255,255,.05);
+
+    background:
+        rgba(255,255,255,.05);
+
     color:#ddd;
+
     cursor:pointer;
+
     font-size:13px;
 }
 
 .suggestion:hover{
-    background:rgba(0,190,210,.15);
+    background:
+        rgba(0,190,210,.15);
 }
 
 /* ================= MESSAGES ================= */
 
 .message-row{
     display:flex;
+
     margin-bottom:18px;
+
     width:100%;
 }
 
@@ -343,70 +497,118 @@ body{
 }
 
 .message{
-    max-width:min(760px,85%);
-    padding:13px 16px;
+    max-width:
+        min(760px,85%);
+
+    padding:
+        13px 16px;
+
     border-radius:17px;
+
     line-height:1.55;
+
     font-size:15px;
+
     white-space:pre-wrap;
+
     word-break:break-word;
 }
 
 .user .message{
-    background:linear-gradient(135deg,#008f9d,#006873);
+    background:
+        linear-gradient(
+            135deg,
+            #008f9d,
+            #006873
+        );
+
     border-bottom-right-radius:5px;
 }
 
 .assistant .message{
-    background:rgba(255,255,255,.075);
-    border:1px solid rgba(255,255,255,.08);
+    background:
+        rgba(255,255,255,.075);
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
     border-bottom-left-radius:5px;
 }
 
 .message img{
     max-width:280px;
+
     width:100%;
+
     border-radius:12px;
+
     margin-top:8px;
 }
 
 /* ================= INPUT ================= */
 
 .input-area{
-    padding:12px 5% 18px;
-    background:linear-gradient(
-        to top,
-        rgba(2,12,16,.95),
-        rgba(2,12,16,.65),
-        transparent
-    );
+    padding:
+        12px 5% 18px;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(2,12,16,.98),
+            rgba(2,12,16,.70),
+            transparent
+        );
 }
 
 .input-box{
     max-width:950px;
+
     margin:auto;
+
     min-height:58px;
+
     display:flex;
+
     align-items:flex-end;
+
     gap:8px;
+
     padding:8px;
+
     border-radius:18px;
-    background:rgba(255,255,255,.07);
-    border:1px solid rgba(255,255,255,.12);
+
+    background:
+        rgba(255,255,255,.07);
+
+    border:
+        1px solid
+        rgba(255,255,255,.12);
+
     backdrop-filter:blur(18px);
 }
 
 #messageInput{
     flex:1;
+
     min-width:0;
+
     max-height:140px;
+
     resize:none;
+
     border:none;
+
     outline:none;
+
     background:transparent;
+
     color:#fff;
+
     padding:10px;
+
     font-size:15px;
+
     line-height:1.4;
 }
 
@@ -417,17 +619,26 @@ body{
 .icon-btn{
     width:42px;
     height:42px;
+
     flex-shrink:0;
+
     border:none;
+
     border-radius:12px;
-    background:rgba(255,255,255,.06);
+
+    background:
+        rgba(255,255,255,.06);
+
     color:#fff;
+
     cursor:pointer;
+
     font-size:18px;
 }
 
 .icon-btn:hover{
-    background:rgba(255,255,255,.12);
+    background:
+        rgba(255,255,255,.12);
 }
 
 .send-btn{
@@ -442,32 +653,51 @@ body{
     display:none;
 }
 
+/* IMAGE PREVIEW */
+
 .image-preview{
     max-width:950px;
-    margin:0 auto 8px;
+
+    margin:
+        0 auto 8px;
+
     display:none;
+
     align-items:center;
+
     gap:10px;
+
     padding:8px;
-    background:rgba(255,255,255,.06);
+
+    background:
+        rgba(255,255,255,.06);
+
     border-radius:12px;
 }
 
 .image-preview img{
     width:55px;
     height:55px;
+
     object-fit:cover;
+
     border-radius:9px;
 }
 
 .remove-image{
     margin-left:auto;
+
     border:none;
+
     background:#a83232;
+
     color:#fff;
+
     width:32px;
     height:32px;
+
     border-radius:9px;
+
     cursor:pointer;
 }
 
@@ -475,16 +705,22 @@ body{
 
 .typing{
     display:flex;
+
     gap:5px;
+
     align-items:center;
 }
 
 .typing span{
     width:7px;
     height:7px;
+
     border-radius:50%;
+
     background:#91dce3;
-    animation:blink 1.2s infinite;
+
+    animation:
+        blink 1.2s infinite;
 }
 
 .typing span:nth-child(2){
@@ -496,9 +732,11 @@ body{
 }
 
 @keyframes blink{
+
     0%,80%,100%{
         opacity:.2;
     }
+
     40%{
         opacity:1;
     }
@@ -507,17 +745,27 @@ body{
 /* ================= LIGHT MODE ================= */
 
 body.light{
-    background:#eef8fa;
     color:#172326;
-}
 
-body.light .video-overlay{
-    background:rgba(240,250,252,.78);
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(0,180,200,.15),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #eefbfc,
+            #dff4f6
+        );
 }
 
 body.light .sidebar{
-    background:rgba(245,252,253,.88);
-    border-color:rgba(0,0,0,.08);
+    background:
+        rgba(245,252,253,.92);
+
+    border-color:
+        rgba(0,0,0,.08);
 }
 
 body.light .brand-name,
@@ -531,41 +779,52 @@ body.light .history-item,
 body.light .suggestion,
 body.light .icon-btn{
     color:#243437;
-    background:rgba(0,0,0,.05);
-    border-color:rgba(0,0,0,.08);
+
+    background:
+        rgba(0,0,0,.05);
+
+    border-color:
+        rgba(0,0,0,.08);
 }
 
 body.light .header{
-    background:rgba(245,252,253,.65);
-    border-color:rgba(0,0,0,.08);
+    background:
+        rgba(245,252,253,.75);
+
+    border-color:
+        rgba(0,0,0,.08);
 }
 
 body.light .input-area{
-    background:linear-gradient(
-        to top,
-        rgba(238,248,250,.95),
-        rgba(238,248,250,.65),
-        transparent
-    );
+    background:
+        linear-gradient(
+            to top,
+            rgba(238,248,250,.98),
+            rgba(238,248,250,.70),
+            transparent
+        );
 }
 
 body.light .input-box{
-    background:rgba(255,255,255,.75);
-    border-color:rgba(0,0,0,.10);
+    background:
+        rgba(255,255,255,.80);
+
+    border-color:
+        rgba(0,0,0,.10);
 }
 
 body.light #messageInput{
     color:#172326;
 }
 
-body.light #messageInput::placeholder{
-    color:#789094;
-}
-
 body.light .assistant .message{
     color:#172326;
-    background:rgba(255,255,255,.75);
-    border-color:rgba(0,0,0,.08);
+
+    background:
+        rgba(255,255,255,.80);
+
+    border-color:
+        rgba(0,0,0,.08);
 }
 
 body.light .welcome p{
@@ -574,16 +833,40 @@ body.light .welcome p{
 
 /* ================= MOBILE ================= */
 
+.sidebar-backdrop{
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+        rgba(0,0,0,.5);
+
+    z-index:10;
+}
+
+.sidebar-backdrop.show{
+    display:block;
+}
+
 @media(max-width:800px){
 
     .sidebar{
         position:fixed;
+
         left:-290px;
+
         top:0;
         bottom:0;
+
         width:280px;
+
         transition:.3s;
-        box-shadow:10px 0 40px rgba(0,0,0,.4);
+
+        box-shadow:
+            10px 0 40px
+            rgba(0,0,0,.4);
     }
 
     .sidebar.open{
@@ -598,21 +881,24 @@ body.light .welcome p{
         padding:0 12px;
     }
 
-    .header-logo{
-        width:34px;
-        height:34px;
+    .header-logo-circle{
+        width:36px;
+        height:36px;
     }
 
     .chat-area{
-        padding:18px 12px;
+        padding:
+            18px 12px;
     }
 
     .input-area{
-        padding:8px 10px 12px;
+        padding:
+            8px 10px 12px;
     }
 
     .message{
         max-width:90%;
+
         font-size:14px;
     }
 
@@ -620,9 +906,11 @@ body.light .welcome p{
         font-size:27px;
     }
 
-    .welcome-logo{
-        width:85px;
-        height:85px;
+    .welcome-icon{
+        width:80px;
+        height:80px;
+
+        font-size:38px;
     }
 
     .suggestions{
@@ -631,40 +919,16 @@ body.light .welcome p{
 
     .suggestion{
         font-size:12px;
-        padding:9px 12px;
+
+        padding:
+            9px 12px;
     }
 }
 
-/* ================= SIDEBAR BACKDROP ================= */
-
-.sidebar-backdrop{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.5);
-    z-index:10;
-}
-
-.sidebar-backdrop.show{
-    display:block;
-}
-
-@media(min-width:801px){
-    .sidebar-backdrop{
-        display:none!important;
-    }
-}
 </style>
 </head>
 
 <body>
-<video>
-    <source src="/background.mp4">
-</video>
-
-<div class="video-overlay"></div>
-
-<div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
 <div class="app">
 
@@ -674,33 +938,62 @@ body.light .welcome p{
 
     <div class="logo-area">
 
-        <img src="/baatai-logo.png">
+        <div class="logo-circle">
+            🤖
+        </div>
 
-        <div class="brand">
-            <div class="brand-name">BaatAI</div>
-            <div class="brand-sub">AI Study Assistant</div>
+        <div>
+
+            <div class="brand-name">
+                BaatAI
+            </div>
+
+            <div class="brand-sub">
+                AI Study Assistant
+            </div>
+
         </div>
 
     </div>
 
-    <button class="new-chat" id="newChatBtn">
+
+    <button
+        class="new-chat"
+        id="newChatBtn">
+
         ＋ New Chat
+
     </button>
 
-    <button class="clear-btn" id="clearHistoryBtn">
+
+    <button
+        class="clear-btn"
+        id="clearHistoryBtn">
+
         🗑 Clear History
+
     </button>
+
 
     <div class="section-title">
         CHATS
     </div>
 
-    <div class="history" id="history"></div>
+
+    <div
+        class="history"
+        id="history">
+    </div>
+
 
     <div class="bottom-controls">
 
-        <button class="theme-btn" id="themeBtn">
+        <button
+            class="theme-btn"
+            id="themeBtn">
+
             🌙 Dark Mode
+
         </button>
 
     </div>
@@ -712,246 +1005,303 @@ body.light .welcome p{
 
 <main class="main">
 
-    <!-- HEADER -->
 
-    <header class="header">
+<!-- HEADER -->
 
-        <div class="header-left">
+<header class="header">
 
-            <button class="mobile-menu" id="menuBtn">
-                ☰
-            </button>
+    <div class="header-left">
 
-            <img
-                class="header-logo"
-                src="/baatai-logo.png"
-                alt="BaatAI Logo"
-            >
+        <button
+            class="mobile-menu"
+            id="menuBtn">
 
-            <div>
-                <div class="header-title">
-                    BaatAI
-                </div>
+            ☰
 
-                <div class="header-sub">
-                    Fast AI Assistant
-                </div>
+        </button>
+
+
+        <div class="header-logo-circle">
+            🤖
+        </div>
+
+
+        <div>
+
+            <div class="header-title">
+                BaatAI
             </div>
 
-        </div>
-
-    </header>
-
-
-    <!-- CHAT -->
-
-    <section class="chat-area" id="chatArea">
-
-        <div class="welcome" id="welcome">
-
-            <img
-                class="welcome"
-                src="/baatai-logo.png"
-            >
-
-            <h1>Welcome to BaatAI</h1>
-
-            <p>
-                Ask anything. Learn, create, code, write and explore
-                with your AI assistant.
-            </p>
-
-            <div class="suggestions">
-
-                <button class="suggestion">
-                    💡 Give me an idea
-                </button>
-
-                <button class="suggestion">
-                    📚 Explain a topic
-                </button>
-
-                <button class="suggestion">
-                    💻 Help me with coding
-                </button>
-
-                <button class="suggestion">
-                    ✍️ Write something
-                </button>
-
+            <div class="header-sub">
+                Fast AI Assistant
             </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================= INPUT ================= -->
-
-    <div class="input-area">
-
-        <div class="image-preview" id="imagePreview">
-
-            <img id="previewImage" src="" alt="Preview">
-
-            <span>Image attached</span>
-
-            <button
-                class="remove-image"
-                id="removeImage">
-                ×
-            </button>
-
-        </div>
-
-        <div class="input-box">
-
-            <!-- IMAGE -->
-
-            <button
-                class="icon-btn"
-                id="imageBtn"
-                title="Upload Image">
-                📎
-            </button>
-
-            <input
-                type="file"
-                id="imageInput"
-                accept="image/*"
-            >
-
-            <!-- TEXT -->
-
-            <textarea
-                id="messageInput"
-                rows="1"
-                placeholder="Message BaatAI..."
-            ></textarea>
-
-            <!-- VOICE -->
-
-            <button
-                class="icon-btn"
-                id="micBtn"
-                title="Voice Input">
-                🎤
-            </button>
-
-            <!-- SEND -->
-
-            <button
-                class="icon-btn send-btn"
-                id="sendBtn"
-                title="Send">
-                ➤
-            </button>
 
         </div>
 
     </div>
+
+</header>
+
+
+<!-- CHAT -->
+
+<section
+    class="chat-area"
+    id="chatArea">
+</section>
+
+
+<!-- INPUT -->
+
+<div class="input-area">
+
+
+    <div
+        class="image-preview"
+        id="imagePreview">
+
+
+        <img
+            id="previewImage"
+            src=""
+            alt="Preview">
+
+
+        <span>
+            Image attached
+        </span>
+
+
+        <button
+            class="remove-image"
+            id="removeImage">
+
+            ×
+
+        </button>
+
+    </div>
+
+
+    <div class="input-box">
+
+
+        <!-- IMAGE -->
+
+        <button
+            class="icon-btn"
+            id="imageBtn"
+            title="Upload Image">
+
+            📎
+
+        </button>
+
+
+        <input
+            type="file"
+            id="imageInput"
+            accept="image/*">
+
+
+        <!-- MESSAGE -->
+
+        <textarea
+            id="messageInput"
+            rows="1"
+            placeholder="Message BaatAI...">
+        </textarea>
+
+
+        <!-- VOICE -->
+
+        <button
+            class="icon-btn"
+            id="micBtn"
+            title="Voice Input">
+
+            🎤
+
+        </button>
+
+
+        <!-- SEND -->
+
+        <button
+            class="icon-btn send-btn"
+            id="sendBtn"
+            title="Send">
+
+            ➤
+
+        </button>
+
+    </div>
+
+</div>
 
 </main>
 
 </div>
 
 
+<!-- SIDEBAR BACKDROP -->
+
+<div
+    class="sidebar-backdrop"
+    id="sidebarBackdrop">
+</div>
+
+
 <script>
 
 /* =====================================================
-   BAATAI FRONTEND
+   BAATAI
    ===================================================== */
 
 const API = "";
 
-const STORAGE_KEY = "baatai-local-chats-v2";
-const THEME_KEY = "baatai-theme";
+const STORAGE_KEY =
+    "baatai-local-chats-v2";
+
+const THEME_KEY =
+    "baatai-theme";
+
 
 let chats = [];
+
 let currentChatId = null;
+
 let selectedImage = null;
 
 
 /* ================= ELEMENTS ================= */
 
 const chatArea =
-    document.getElementById("chatArea");
-
-const welcome =
-    document.getElementById("welcome");
+    document.getElementById(
+        "chatArea"
+    );
 
 const messageInput =
-    document.getElementById("messageInput");
+    document.getElementById(
+        "messageInput"
+    );
 
 const sendBtn =
-    document.getElementById("sendBtn");
+    document.getElementById(
+        "sendBtn"
+    );
 
 const imageBtn =
-    document.getElementById("imageBtn");
+    document.getElementById(
+        "imageBtn"
+    );
 
 const imageInput =
-    document.getElementById("imageInput");
+    document.getElementById(
+        "imageInput"
+    );
 
 const micBtn =
-    document.getElementById("micBtn");
+    document.getElementById(
+        "micBtn"
+    );
 
 const imagePreview =
-    document.getElementById("imagePreview");
+    document.getElementById(
+        "imagePreview"
+    );
 
 const previewImage =
-    document.getElementById("previewImage");
+    document.getElementById(
+        "previewImage"
+    );
 
 const removeImage =
-    document.getElementById("removeImage");
+    document.getElementById(
+        "removeImage"
+    );
 
 const historyBox =
-    document.getElementById("history");
+    document.getElementById(
+        "history"
+    );
 
 const sidebar =
-    document.getElementById("sidebar");
+    document.getElementById(
+        "sidebar"
+    );
 
 const menuBtn =
-    document.getElementById("menuBtn");
+    document.getElementById(
+        "menuBtn"
+    );
 
 const sidebarBackdrop =
-    document.getElementById("sidebarBackdrop");
+    document.getElementById(
+        "sidebarBackdrop"
+    );
 
 const themeBtn =
-    document.getElementById("themeBtn");
+    document.getElementById(
+        "themeBtn"
+    );
 
 const newChatBtn =
-    document.getElementById("newChatBtn");
+    document.getElementById(
+        "newChatBtn"
+    );
 
 const clearHistoryBtn =
-    document.getElementById("clearHistoryBtn");
+    document.getElementById(
+        "clearHistoryBtn"
+    );
 
 
-/* ================= LOAD DATA ================= */
+/* ================= LOAD ================= */
 
 function loadData(){
 
     try{
+
         chats =
             JSON.parse(
-                localStorage.getItem(STORAGE_KEY)
+                localStorage.getItem(
+                    STORAGE_KEY
+                )
             ) || [];
-    }catch(e){
+
+    }catch(error){
+
         chats = [];
+
     }
+
 
     const savedTheme =
-        localStorage.getItem(THEME_KEY);
+        localStorage.getItem(
+            THEME_KEY
+        );
+
 
     if(savedTheme === "light"){
-        document.body.classList.add("light");
-        themeBtn.textContent = "☀️ Light Mode";
+
+        document.body.classList.add(
+            "light"
+        );
+
+        themeBtn.textContent =
+            "☀️ Light Mode";
+
     }
 
+
     renderHistory();
+
 }
 
 
-/* ================= SAVE DATA ================= */
+/* ================= SAVE ================= */
 
 function saveData(){
 
@@ -970,17 +1320,26 @@ function createNewChat(){
     const id =
         Date.now().toString();
 
+
     const chat = {
+
         id:id,
+
         title:"New Chat",
+
         messages:[],
+
         createdAt:Date.now(),
+
         updatedAt:Date.now()
+
     };
+
 
     chats.unshift(chat);
 
     currentChatId = id;
+
 
     saveData();
 
@@ -991,6 +1350,7 @@ function createNewChat(){
     closeSidebar();
 
     messageInput.focus();
+
 }
 
 
@@ -999,12 +1359,14 @@ function createNewChat(){
 function getCurrentChat(){
 
     return chats.find(
-        chat => chat.id === currentChatId
+        chat =>
+        chat.id === currentChatId
     );
+
 }
 
 
-/* ================= ENSURE CHAT ================= */
+/* ================= ENSURE ================= */
 
 function ensureChat(){
 
@@ -1015,6 +1377,7 @@ function ensureChat(){
     }
 
     return getCurrentChat();
+
 }
 
 
@@ -1024,43 +1387,56 @@ function renderHistory(){
 
     historyBox.innerHTML = "";
 
+
     if(chats.length === 0){
 
         historyBox.innerHTML = `
+
             <div style="
                 color:#71888c;
                 font-size:12px;
                 padding:10px;
             ">
+
                 No chats yet
+
             </div>
+
         `;
 
         return;
+
     }
+
 
     chats.forEach(chat => {
 
         const item =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
-        item.className = "history-item";
+
+        item.className =
+            "history-item";
+
 
         item.textContent =
-            chat.title || "New Chat";
+            chat.title ||
+            "New Chat";
 
-        item.title =
-            chat.title || "New Chat";
 
         item.onclick = () => {
 
-            currentChatId = chat.id;
+            currentChatId =
+                chat.id;
 
             renderCurrentChat();
 
             closeSidebar();
 
         };
+
 
         historyBox.appendChild(item);
 
@@ -1075,28 +1451,40 @@ function renderCurrentChat(){
 
     chatArea.innerHTML = "";
 
-    const chat = getCurrentChat();
 
-    if(!chat || chat.messages.length === 0){
+    const chat =
+        getCurrentChat();
+
+
+    if(
+        !chat ||
+        chat.messages.length === 0
+    ){
 
         chatArea.appendChild(
             createWelcome()
         );
 
         return;
+
     }
 
-    chat.messages.forEach(message => {
 
-        addMessageToUI(
-            message.role,
-            message.content,
-            message.image || null
-        );
+    chat.messages.forEach(
+        message => {
 
-    });
+            addMessageToUI(
+                message.role,
+                message.content,
+                message.image || null
+            );
+
+        }
+    );
+
 
     scrollBottom();
+
 }
 
 
@@ -1105,59 +1493,84 @@ function renderCurrentChat(){
 function createWelcome(){
 
     const div =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
-    div.className = "welcome";
+
+    div.className =
+        "welcome";
+
 
     div.innerHTML = `
 
-<img src="/baatai-logo-2.png" alt="BaatAI Logo">
-        <h1>Welcome to BaatAI</h1>
+        <div class="welcome-icon">
+            🤖
+        </div>
+
+        <h1>
+            Welcome to BaatAI
+        </h1>
 
         <p>
-            Ask anything. Learn, create, code, write
-            and explore with your AI assistant.
+            Ask anything. Learn, create,
+            code, write and explore
+            with your AI assistant.
         </p>
 
+
         <div class="suggestions">
+
 
             <button class="suggestion">
                 💡 Give me an idea
             </button>
 
+
             <button class="suggestion">
                 📚 Explain a topic
             </button>
+
 
             <button class="suggestion">
                 💻 Help me with coding
             </button>
 
+
             <button class="suggestion">
                 ✍️ Write something
             </button>
+
 
         </div>
 
     `;
 
-    div.querySelectorAll(".suggestion")
-        .forEach(btn => {
 
-            btn.onclick = () => {
+    div.querySelectorAll(
+        ".suggestion"
+    ).forEach(button => {
 
-                messageInput.value =
-                    btn.textContent
-                    .replace(/^[^\w]+/,"")
-                    .trim();
+        button.onclick = () => {
 
-                sendMessage();
+            messageInput.value =
+                button.textContent
+                .replace(
+                    /^[^\w]+/,
+                    ""
+                )
+                .trim();
 
-            };
 
-        });
+            sendMessage();
+
+        };
+
+    });
+
 
     return div;
+
 }
 
 
@@ -1170,33 +1583,52 @@ function addMessageToUI(
 ){
 
     const row =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
     row.className =
-        "message-row " + role;
+        "message-row " +
+        role;
+
 
     const bubble =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
     bubble.className =
         "message";
 
+
     if(content){
-        bubble.textContent = content;
+
+        bubble.textContent =
+            content;
+
     }
+
 
     if(image){
 
         const img =
-            document.createElement("img");
+            document.createElement(
+                "img"
+            );
+
 
         img.src = image;
 
-        img.alt = "Uploaded image";
+        img.alt =
+            "Uploaded image";
+
 
         bubble.appendChild(img);
 
     }
+
 
     row.appendChild(bubble);
 
@@ -1210,12 +1642,18 @@ function addMessageToUI(
 function showTyping(){
 
     const row =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
     row.className =
         "message-row assistant";
 
-    row.id = "typingMessage";
+
+    row.id =
+        "typingMessage";
+
 
     row.innerHTML = `
 
@@ -1233,6 +1671,7 @@ function showTyping(){
 
     `;
 
+
     chatArea.appendChild(row);
 
     scrollBottom();
@@ -1247,8 +1686,11 @@ function hideTyping(){
             "typingMessage"
         );
 
+
     if(typing){
+
         typing.remove();
+
     }
 
 }
@@ -1268,27 +1710,36 @@ function scrollBottom(){
 }
 
 
-/* ================= CONVERSATION ================= */
+/* ================= API CONVERSATION ================= */
 
 function getConversationForAPI(){
 
     const chat =
         getCurrentChat();
 
+
     if(!chat){
+
         return [];
+
     }
+
 
     return chat.messages
         .slice(-20)
         .map(item => ({
+
             role:
-                item.role === "assistant"
-                    ? "assistant"
-                    : "user",
+                item.role ===
+                "assistant"
+                ? "assistant"
+                : "user",
 
             content:
-                String(item.content || "")
+                String(
+                    item.content || ""
+                )
+
         }));
 
 }
@@ -1301,59 +1752,68 @@ async function sendMessage(){
     const text =
         messageInput.value.trim();
 
-    if(!text && !selectedImage){
+
+    if(
+        !text &&
+        !selectedImage
+    ){
+
         return;
+
     }
+
 
     const chat =
         ensureChat();
 
+
     if(!chat){
+
         return;
+
     }
 
-    /*
-      IMPORTANT:
-      Conversation is collected BEFORE
-      current user message is saved.
-      This prevents duplicate messages.
-    */
 
     const conversation =
         getConversationForAPI();
 
+
     const imageForMessage =
         selectedImage;
 
-    const userMessage = {
+
+    chat.messages.push({
 
         role:"user",
 
         content:text,
 
-        image:imageForMessage || null
+        image:
+            imageForMessage || null
 
-    };
+    });
 
-    chat.messages.push(userMessage);
 
     if(
-        chat.title === "New Chat" &&
+        chat.title ===
+        "New Chat" &&
         text
     ){
 
         chat.title =
             text.length > 35
-                ? text.substring(0,35) + "..."
-                : text;
+            ? text.substring(0,35) + "..."
+            : text;
 
     }
 
-    chat.updatedAt = Date.now();
+
+    chat.updatedAt =
+        Date.now();
+
 
     saveData();
 
-    welcome?.remove();
 
     addMessageToUI(
         "user",
@@ -1361,23 +1821,31 @@ async function sendMessage(){
         imageForMessage
     );
 
+
     messageInput.value = "";
 
     messageInput.style.height =
         "auto";
 
+
     selectedImage = null;
+
 
     imagePreview.style.display =
         "none";
 
+
     previewImage.src = "";
+
+    imageInput.value = "";
+
 
     renderHistory();
 
     scrollBottom();
 
     showTyping();
+
 
     sendBtn.disabled = true;
 
@@ -1397,8 +1865,7 @@ async function sendMessage(){
 
                     body:JSON.stringify({
 
-                        message:
-                            text,
+                        message:text,
 
                         conversation:
                             conversation,
@@ -1407,6 +1874,7 @@ async function sendMessage(){
                             imageForMessage
 
                     })
+
                 }
             );
 
@@ -1432,6 +1900,7 @@ async function sendMessage(){
 
         hideTyping();
 
+
         addMessageToUI(
             "assistant",
             reply
@@ -1452,6 +1921,7 @@ async function sendMessage(){
         chat.updatedAt =
             Date.now();
 
+
         saveData();
 
         renderHistory();
@@ -1463,11 +1933,12 @@ async function sendMessage(){
 
         hideTyping();
 
+
         const errorMessage =
             "⚠️ " +
             (
                 error.message ||
-                "Something went wrong. Please try again."
+                "Something went wrong."
             );
 
 
@@ -1492,10 +1963,10 @@ async function sendMessage(){
 
         scrollBottom();
 
+
     }finally{
 
-        sendBtn.disabled =
-            false;
+        sendBtn.disabled = false;
 
         messageInput.focus();
 
@@ -1504,7 +1975,7 @@ async function sendMessage(){
 }
 
 
-/* ================= ENTER KEY ================= */
+/* ================= ENTER ================= */
 
 messageInput.addEventListener(
     "keydown",
@@ -1525,7 +1996,7 @@ messageInput.addEventListener(
 );
 
 
-/* ================= AUTO TEXTAREA ================= */
+/* ================= TEXTAREA ================= */
 
 messageInput.addEventListener(
     "input",
@@ -1533,6 +2004,7 @@ messageInput.addEventListener(
 
         this.style.height =
             "auto";
+
 
         this.style.height =
             Math.min(
@@ -1544,7 +2016,7 @@ messageInput.addEventListener(
 );
 
 
-/* ================= SEND BUTTON ================= */
+/* ================= SEND ================= */
 
 sendBtn.addEventListener(
     "click",
@@ -1552,11 +2024,12 @@ sendBtn.addEventListener(
 );
 
 
-/* ================= IMAGE UPLOAD ================= */
+/* ================= IMAGE ================= */
 
 imageBtn.addEventListener(
     "click",
-    () => imageInput.click()
+    () =>
+        imageInput.click()
 );
 
 
@@ -1567,11 +2040,19 @@ imageInput.addEventListener(
         const file =
             this.files[0];
 
+
         if(!file){
+
             return;
+
         }
 
-        if(!file.type.startsWith("image/")){
+
+        if(
+            !file.type.startsWith(
+                "image/"
+            )
+        ){
 
             alert(
                 "Please select an image."
@@ -1581,21 +2062,27 @@ imageInput.addEventListener(
 
         }
 
+
         const reader =
             new FileReader();
 
-        reader.onload = function(e){
 
-            selectedImage =
-                e.target.result;
+        reader.onload =
+            function(event){
 
-            previewImage.src =
-                selectedImage;
+                selectedImage =
+                    event.target.result;
 
-            imagePreview.style.display =
-                "flex";
 
-        };
+                previewImage.src =
+                    selectedImage;
+
+
+                imagePreview.style.display =
+                    "flex";
+
+            };
+
 
         reader.readAsDataURL(file);
 
@@ -1622,9 +2109,10 @@ removeImage.addEventListener(
 );
 
 
-/* ================= VOICE INPUT ================= */
+/* ================= VOICE ================= */
 
 let recognition = null;
+
 
 const SpeechRecognition =
     window.SpeechRecognition ||
@@ -1636,51 +2124,69 @@ if(SpeechRecognition){
     recognition =
         new SpeechRecognition();
 
-    recognition.lang = "hi-IN";
 
-    recognition.continuous = false;
-
-    recognition.interimResults = false;
+    recognition.lang =
+        "hi-IN";
 
 
-    recognition.onstart = () => {
-
-        micBtn.textContent = "🔴";
-
-    };
+    recognition.continuous =
+        false;
 
 
-    recognition.onend = () => {
-
-        micBtn.textContent = "🎤";
-
-    };
+    recognition.interimResults =
+        false;
 
 
-    recognition.onerror = () => {
+    recognition.onstart =
+        () => {
 
-        micBtn.textContent = "🎤";
+            micBtn.textContent =
+                "🔴";
 
-    };
+        };
 
 
-    recognition.onresult = event => {
+    recognition.onend =
+        () => {
 
-        const transcript =
-            event.results[0][0].transcript;
+            micBtn.textContent =
+                "🎤";
 
-        messageInput.value +=
-            (
-                messageInput.value
+        };
+
+
+    recognition.onerror =
+        () => {
+
+            micBtn.textContent =
+                "🎤";
+
+        };
+
+
+    recognition.onresult =
+        event => {
+
+            const transcript =
+                event
+                .results[0][0]
+                .transcript;
+
+
+            messageInput.value +=
+                (
+                    messageInput.value
                     ? " "
                     : ""
-            ) + transcript;
+                ) +
+                transcript;
 
-        messageInput.dispatchEvent(
-            new Event("input")
-        );
 
-    };
+            messageInput.dispatchEvent(
+                new Event("input")
+            );
+
+        };
 
 
     micBtn.addEventListener(
@@ -1691,7 +2197,7 @@ if(SpeechRecognition){
 
                 recognition.start();
 
-            }catch(e){}
+            }catch(error){}
 
         }
     );
@@ -1720,28 +2226,36 @@ newChatBtn.addEventListener(
 );
 
 
-/* ================= CLEAR HISTORY ================= */
+/* ================= CLEAR ================= */
 
 clearHistoryBtn.addEventListener(
     "click",
     () => {
 
         if(chats.length === 0){
+
             return;
+
         }
+
 
         const ok =
             confirm(
                 "क्या आप पूरी chat history delete करना चाहते हैं?"
             );
 
+
         if(!ok){
+
             return;
+
         }
+
 
         chats = [];
 
         currentChatId = null;
+
 
         saveData();
 
@@ -1763,43 +2277,54 @@ themeBtn.addEventListener(
             "light"
         );
 
+
         const isLight =
             document.body.classList.contains(
                 "light"
             );
 
+
         localStorage.setItem(
             THEME_KEY,
             isLight
-                ? "light"
-                : "dark"
+            ? "light"
+            : "dark"
         );
+
 
         themeBtn.textContent =
             isLight
-                ? "☀️ Light Mode"
-                : "🌙 Dark Mode";
+            ? "☀️ Light Mode"
+            : "🌙 Dark Mode";
 
     }
 );
 
 
-/* ================= MOBILE MENU ================= */
+/* ================= MOBILE SIDEBAR ================= */
 
 function openSidebar(){
 
-    sidebar.classList.add("open");
+    sidebar.classList.add(
+        "open"
+    );
 
-    sidebarBackdrop.classList.add("show");
+    sidebarBackdrop.classList.add(
+        "show"
+    );
 
 }
 
 
 function closeSidebar(){
 
-    sidebar.classList.remove("open");
+    sidebar.classList.remove(
+        "open"
+    );
 
-    sidebarBackdrop.classList.remove("show");
+    sidebarBackdrop.classList.remove(
+        "show"
+    );
 
 }
 
@@ -1820,16 +2345,16 @@ sidebarBackdrop.addEventListener(
 
 loadData();
 
+
 if(chats.length > 0){
 
     currentChatId =
         chats[0].id;
 
+
     renderCurrentChat();
 
 }else{
-
-    chatArea.innerHTML = "";
 
     chatArea.appendChild(
         createWelcome()
