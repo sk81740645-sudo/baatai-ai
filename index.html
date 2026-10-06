@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>BaatAI - AI Study Assistant</title>
-  <meta name="description"
-        content="BaatAI - Your AI Study Assistant for study, coding, stories, ideas and daily questions.">
+<title>BaatAI - AI Study Assistant</title>
 
-  <link rel="icon" href="/baatai-logo-2.png">
-  <link rel="stylesheet" href="style.css">
-    <style>
-        * {
+<meta name="description"
+content="BaatAI - Your AI Study Assistant for study, coding, stories, ideas and daily questions.">
+
+<link rel="icon" href="/baatai-logo-2.png">
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -19,12 +25,21 @@
 
 :root {
   --cyan: #00eaff;
-  --cyan2: #00a8c8;
-  --bg: #02080b;
-  --panel: rgba(3, 17, 21, 0.82);
-  --border: rgba(0, 234, 255, 0.45);
+  --bg: #010609;
   --text: #f3f8fa;
   --muted: #8ca5aa;
+  --border: rgba(0, 234, 255, .45);
+}
+
+
+/* =========================
+   BODY
+========================= */
+
+html,
+body {
+  width: 100%;
+  height: 100%;
 }
 
 body {
@@ -37,37 +52,33 @@ body {
 
 
 /* =========================
-   BACKGROUND
+   FUTURISTIC BACKGROUND
 ========================= */
 
 .network-bg {
   position: fixed;
   inset: 0;
-  z-index: -5;
+  z-index: 0;
+  pointer-events: none;
 
   background:
-    radial-gradient(circle at 10% 20%, rgba(0, 234, 255, .12) 0 1px, transparent 2px),
-    radial-gradient(circle at 80% 30%, rgba(0, 234, 255, .12) 0 1px, transparent 2px),
-    radial-gradient(circle at 40% 70%, rgba(0, 234, 255, .12) 0 1px, transparent 2px),
-    linear-gradient(
-      125deg,
-      #010507,
-      #001116,
-      #020a0d,
-      #000506
-    );
+    radial-gradient(circle at 10% 15%, rgba(0,234,255,.18) 0 2px, transparent 3px),
+    radial-gradient(circle at 30% 40%, rgba(0,234,255,.15) 0 2px, transparent 3px),
+    radial-gradient(circle at 70% 25%, rgba(0,234,255,.18) 0 2px, transparent 3px),
+    radial-gradient(circle at 90% 70%, rgba(0,234,255,.15) 0 2px, transparent 3px),
+    linear-gradient(125deg,#010507,#001116,#020a0d,#000506);
 
   background-size:
-    150px 150px,
-    190px 190px,
+    170px 170px,
     220px 220px,
+    190px 190px,
+    250px 250px,
     100% 100%;
 
-  animation: backgroundMove 18s linear infinite;
+  animation: bgMove 20s linear infinite;
 }
 
-.network-bg::before,
-.network-bg::after {
+.network-bg::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -75,17 +86,17 @@ body {
   background-image:
     linear-gradient(30deg,
       transparent 48%,
-      rgba(0, 234, 255, .05) 49%,
+      rgba(0,234,255,.07) 49%,
       transparent 50%),
     linear-gradient(150deg,
       transparent 48%,
-      rgba(0, 234, 255, .04) 49%,
+      rgba(0,234,255,.06) 49%,
       transparent 50%);
 
   background-size: 230px 180px;
 }
 
-@keyframes backgroundMove {
+@keyframes bgMove {
   0% {
     background-position: 0 0;
   }
@@ -99,116 +110,32 @@ body {
   }
 }
 
+
+/* =========================
+   GLOW
+========================= */
+
 .glow {
   position: fixed;
-  width: 250px;
-  height: 250px;
+  width: 260px;
+  height: 260px;
   border-radius: 50%;
   filter: blur(100px);
+  opacity: .12;
   pointer-events: none;
-  opacity: .15;
-  z-index: -3;
+  z-index: 1;
 }
 
 .glow1 {
   background: #00eaff;
-  left: -100px;
+  left: -120px;
   top: 25%;
 }
 
 .glow2 {
   background: #006bff;
-  right: -100px;
+  right: -120px;
   bottom: 15%;
-}
-
-
-/* =========================
-   SIDEBAR
-========================= */
-
-aside {
-  position: fixed;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 270px;
-
-  background: rgba(2, 12, 16, .96);
-  border-right: 1px solid var(--border);
-
-  padding: 25px 18px;
-
-  z-index: 100;
-
-  transform: translateX(-100%);
-  transition: .3s ease;
-}
-
-aside.open {
-  transform: translateX(0);
-}
-
-.side-logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 35px;
-}
-
-.robot {
-  font-size: 38px;
-}
-
-.side-title {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.side-sub {
-  color: var(--cyan);
-  font-size: 13px;
-}
-
-.new-chat,
-.side-btn {
-  width: 100%;
-  padding: 14px;
-  margin-bottom: 12px;
-
-  background: rgba(0, 234, 255, .06);
-
-  border: 1px solid rgba(0, 234, 255, .25);
-  border-radius: 14px;
-
-  color: white;
-  text-align: left;
-  font-size: 15px;
-
-  cursor: pointer;
-}
-
-.new-chat:hover,
-.side-btn:hover {
-  background: rgba(0, 234, 255, .15);
-  border-color: var(--cyan);
-}
-
-.history-title {
-  margin-top: 30px;
-  margin-bottom: 12px;
-
-  font-size: 11px;
-  color: #63858b;
-  letter-spacing: 2px;
-}
-
-.history-item {
-  padding: 10px;
-  border-radius: 10px;
-  color: #a9c0c5;
-  font-size: 13px;
-  margin-bottom: 5px;
 }
 
 
@@ -217,8 +144,10 @@ aside.open {
 ========================= */
 
 main {
-  height: 100vh;
+  position: relative;
+  z-index: 5;
   width: 100%;
+  height: 100vh;
 }
 
 
@@ -227,34 +156,50 @@ main {
 ========================= */
 
 header {
+  position: relative;
+  z-index: 50;
+
   height: 112px;
 
   display: flex;
   align-items: center;
 
-  padding: 20px 30px;
+  padding: 18px 30px;
 
-  border-bottom: 1px solid rgba(0, 234, 255, .12);
+  background: rgba(1,7,10,.78);
 
-  background: rgba(1, 7, 10, .65);
+  border-bottom: 1px solid rgba(0,234,255,.15);
 
-  backdrop-filter: blur(12px);
-
-  position: relative;
-  z-index: 20;
+  backdrop-filter: blur(15px);
 }
 
+
+/* MENU */
+
 .menu-btn {
-  background: none;
+  width: 55px;
+  height: 55px;
+
   border: none;
+  background: transparent;
+
   color: white;
 
   font-size: 40px;
 
-  margin-right: 20px;
-
   cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-right: 15px;
+
+  touch-action: manipulation;
 }
+
+
+/* BRAND */
 
 .brand {
   display: flex;
@@ -273,28 +218,35 @@ header {
 
 .brand-sub {
   color: var(--cyan);
-  font-size: 17px;
-  margin-top: 2px;
+  font-size: 16px;
+  margin-top: 3px;
 }
+
+
+/* HEADER RIGHT */
 
 .header-right {
   margin-left: auto;
 
   display: flex;
   align-items: center;
+
   gap: 12px;
 }
 
+
+/* THEME */
+
 .theme-btn {
-  height: 62px;
+  height: 60px;
 
-  padding: 0 22px;
+  padding: 0 20px;
 
-  border: 1px solid rgba(0, 234, 255, .4);
+  border: 1px solid rgba(0,234,255,.4);
 
   border-radius: 17px;
 
-  background: rgba(0, 20, 25, .65);
+  background: rgba(0,20,25,.7);
 
   color: white;
 
@@ -302,14 +254,19 @@ header {
 
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 9px;
 
   cursor: pointer;
+
+  touch-action: manipulation;
 }
 
 .theme-btn span:first-child {
-  font-size: 28px;
+  font-size: 27px;
 }
+
+
+/* PROFILE */
 
 .profile-btn {
   width: 58px;
@@ -317,19 +274,23 @@ header {
 
   border-radius: 50%;
 
-  border: 1px solid rgba(0, 234, 255, .4);
+  border: 1px solid rgba(0,234,255,.45);
 
-  background: rgba(0, 234, 255, .12);
+  background: rgba(0,234,255,.1);
 
   color: white;
 
   font-size: 22px;
 
   cursor: pointer;
+
+  touch-action: manipulation;
 }
 
 
-/* PROFILE */
+/* =========================
+   PROFILE POPUP
+========================= */
 
 #profilePopup {
   display: none;
@@ -337,20 +298,23 @@ header {
   position: absolute;
 
   right: 25px;
-  top: 85px;
+  top: 90px;
 
-  width: 220px;
+  width: 230px;
 
   padding: 20px;
 
+  background: rgba(2,15,19,.98);
+
   border: 1px solid var(--border);
+
   border-radius: 18px;
 
-  background: rgba(2, 15, 19, .98);
-
-  box-shadow: 0 15px 50px rgba(0,0,0,.5);
-
   text-align: center;
+
+  box-shadow: 0 15px 50px rgba(0,0,0,.6);
+
+  z-index: 100;
 }
 
 #profilePopup.show {
@@ -361,23 +325,24 @@ header {
   width: 55px;
   height: 55px;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
   margin: auto auto 10px;
 
   border-radius: 50%;
 
-  background: rgba(0, 234, 255, .12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   border: 1px solid var(--cyan);
+
+  background: rgba(0,234,255,.12);
 
   font-size: 22px;
 }
 
 #profilePopup strong {
   display: block;
+  font-size: 18px;
 }
 
 #profilePopup small {
@@ -399,17 +364,26 @@ header {
 
 
 /* =========================
-   CHAT
+   CHAT AREA
 ========================= */
 
 #chatArea {
+  position: relative;
+  z-index: 5;
+
   height: calc(100vh - 112px);
+
   overflow-y: auto;
 
   padding: 35px 30px 190px;
 
   scroll-behavior: smooth;
 }
+
+
+/* =========================
+   WELCOME
+========================= */
 
 #welcome {
   text-align: center;
@@ -421,7 +395,7 @@ header {
   align-items: center;
   justify-content: center;
 
-  gap: 16px;
+  gap: 15px;
 
   color: var(--cyan);
 
@@ -432,6 +406,7 @@ header {
 .welcome-title span {
   width: 100px;
   height: 1px;
+
   background: linear-gradient(
     90deg,
     transparent,
@@ -444,8 +419,10 @@ header {
 }
 
 .welcome-sub {
-  color: #57747a;
   margin-top: 8px;
+
+  color: #57747a;
+
   font-size: 13px;
 }
 
@@ -477,25 +454,25 @@ header {
 
   padding: 20px 28px;
 
-  border: 1px solid rgba(0, 234, 255, .45);
+  border: 1px solid rgba(0,234,255,.45);
 
-  background: rgba(3, 20, 24, .78);
+  background: rgba(3,20,24,.82);
 
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
 
   border-radius: 25px;
 
   font-size: 19px;
+
   line-height: 1.7;
 
-  box-shadow:
-    0 0 25px rgba(0, 234, 255, .03);
+  overflow-wrap: break-word;
 }
 
 .user-message .bubble {
   border-radius: 25px 25px 5px 25px;
 
-  background: rgba(0, 42, 48, .65);
+  background: rgba(0,42,48,.7);
 }
 
 .ai-message .bubble {
@@ -514,11 +491,11 @@ header {
 .input-wrapper {
   position: fixed;
 
+  z-index: 40;
+
   left: 20px;
   right: 20px;
-  bottom: 18px;
-
-  z-index: 30;
+  bottom: 15px;
 
   max-width: 1050px;
 
@@ -526,26 +503,28 @@ header {
 }
 
 .input-box {
-
   min-height: 82px;
 
-  padding: 10px;
+  padding: 9px;
 
   display: flex;
   align-items: center;
+
   gap: 8px;
 
-  border: 1px solid rgba(0, 234, 255, .35);
+  border: 1px solid rgba(0,234,255,.4);
 
   border-radius: 42px;
 
-  background: rgba(2, 13, 17, .9);
+  background: rgba(2,13,17,.95);
 
   backdrop-filter: blur(18px);
 
-  box-shadow:
-    0 10px 40px rgba(0,0,0,.4);
+  box-shadow: 0 10px 40px rgba(0,0,0,.45);
 }
+
+
+/* ICON BUTTON */
 
 .icon-btn {
   flex: 0 0 auto;
@@ -555,24 +534,30 @@ header {
 
   border-radius: 50%;
 
-  border: 1px solid rgba(0, 234, 255, .3);
+  border: 1px solid rgba(0,234,255,.3);
 
-  background: rgba(0, 234, 255, .07);
+  background: rgba(0,234,255,.07);
 
   color: white;
 
-  font-size: 24px;
+  font-size: 23px;
 
   cursor: pointer;
+
+  touch-action: manipulation;
 }
 
-.icon-btn:hover {
-  border-color: var(--cyan);
-  background: rgba(0, 234, 255, .15);
+.icon-btn:active {
+  transform: scale(.94);
 }
+
+
+/* TEXTAREA */
 
 textarea {
   flex: 1;
+
+  width: 100%;
 
   resize: none;
 
@@ -581,20 +566,24 @@ textarea {
   background: transparent;
 
   border: none;
+
   outline: none;
 
   color: white;
 
   font-size: 18px;
 
-  padding: 15px;
+  padding: 15px 8px;
 
-  font-family: inherit;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 textarea::placeholder {
   color: #72858a;
 }
+
+
+/* SEND */
 
 .send-btn {
   flex: 0 0 auto;
@@ -614,16 +603,19 @@ textarea::placeholder {
 
   cursor: pointer;
 
+  touch-action: manipulation;
+
   transition: .2s;
 }
 
-.send-btn:hover {
-  transform: scale(1.07);
-  box-shadow: 0 0 25px rgba(255,255,255,.25);
+.send-btn:active {
+  transform: scale(.92);
 }
 
 
-/* IMAGE PREVIEW */
+/* =========================
+   IMAGE PREVIEW
+========================= */
 
 #imagePreview {
   text-align: center;
@@ -633,12 +625,17 @@ textarea::placeholder {
   max-width: 150px;
   max-height: 100px;
 
-  margin-bottom: 5px;
+  margin: 5px;
 
   border-radius: 12px;
 
   border: 1px solid var(--cyan);
 }
+
+
+/* =========================
+   FOOTER
+========================= */
 
 .footer-text {
   text-align: center;
@@ -652,6 +649,121 @@ textarea::placeholder {
 
 
 /* =========================
+   SIDEBAR
+========================= */
+
+aside {
+  position: fixed;
+
+  left: 0;
+  top: 0;
+  bottom: 0;
+
+  width: 275px;
+
+  padding: 25px 18px;
+
+  background: rgba(2,12,16,.98);
+
+  border-right: 1px solid var(--border);
+
+  z-index: 200;
+
+  transform: translateX(-100%);
+
+  transition: transform .3s ease;
+}
+
+aside.open {
+  transform: translateX(0);
+}
+
+.side-logo {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  margin-bottom: 35px;
+}
+
+.robot {
+  font-size: 38px;
+}
+
+.side-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.side-sub {
+  color: var(--cyan);
+  font-size: 13px;
+}
+
+
+/* SIDEBAR BUTTONS */
+
+.new-chat,
+.side-btn {
+  width: 100%;
+
+  padding: 14px;
+
+  margin-bottom: 12px;
+
+  border-radius: 14px;
+
+  border: 1px solid rgba(0,234,255,.25);
+
+  background: rgba(0,234,255,.06);
+
+  color: white;
+
+  text-align: left;
+
+  font-size: 15px;
+
+  cursor: pointer;
+
+  touch-action: manipulation;
+}
+
+.new-chat:active,
+.side-btn:active {
+  transform: scale(.98);
+}
+
+
+/* HISTORY */
+
+.history-title {
+  margin-top: 30px;
+  margin-bottom: 12px;
+
+  font-size: 11px;
+
+  color: #63858b;
+
+  letter-spacing: 2px;
+}
+
+.history-item {
+  padding: 10px;
+
+  border-radius: 10px;
+
+  color: #a9c0c5;
+
+  font-size: 13px;
+
+  margin-bottom: 5px;
+
+  cursor: pointer;
+}
+
+
+/* =========================
    OVERLAY
 ========================= */
 
@@ -659,11 +771,12 @@ textarea::placeholder {
   display: none;
 
   position: fixed;
+
   inset: 0;
 
-  background: rgba(0,0,0,.55);
+  background: rgba(0,0,0,.6);
 
-  z-index: 90;
+  z-index: 150;
 }
 
 #overlay.show {
@@ -676,41 +789,38 @@ textarea::placeholder {
 ========================= */
 
 body.light {
-  --text: #071418;
-  --bg: #eefbfc;
-
   background: #eaf8fa;
   color: #071418;
 }
 
+body.light header {
+  background: rgba(240,255,255,.9);
+}
+
 body.light .network-bg {
-  opacity: .18;
+  opacity: .25;
   filter: invert(1);
 }
 
-body.light header {
-  background: rgba(240,255,255,.85);
+body.light .bubble {
+  background: rgba(255,255,255,.85);
+  color: #071418;
 }
 
-body.light .bubble {
-  background: rgba(255,255,255,.8);
-  color: #071418;
+body.light .input-box {
+  background: rgba(255,255,255,.9);
 }
 
 body.light textarea {
   color: #071418;
 }
 
-body.light .input-box {
-  background: rgba(255,255,255,.85);
-}
-
 body.light .theme-btn {
   color: #071418;
 }
 
-body.light .footer-text {
-  color: #678087;
+body.light .menu-btn {
+  color: #071418;
 }
 
 
@@ -718,16 +828,20 @@ body.light .footer-text {
    MOBILE
 ========================= */
 
-@media (max-width: 700px) {
+@media (max-width:700px) {
 
   header {
     height: 92px;
-    padding: 12px 15px;
+    padding: 10px 12px;
   }
 
   .menu-btn {
+    width: 48px;
+    height: 48px;
+
     font-size: 34px;
-    margin-right: 8px;
+
+    margin-right: 6px;
   }
 
   .brand-logo {
@@ -742,9 +856,15 @@ body.light .footer-text {
     font-size: 12px;
   }
 
+  .header-right {
+    gap: 7px;
+  }
+
   .theme-btn {
     height: 48px;
-    padding: 0 13px;
+
+    padding: 0 12px;
+
     font-size: 14px;
   }
 
@@ -759,6 +879,7 @@ body.light .footer-text {
 
   #chatArea {
     height: calc(100vh - 92px);
+
     padding: 25px 15px 175px;
   }
 
@@ -771,8 +892,10 @@ body.light .footer-text {
   }
 
   .bubble {
-    max-width: 88%;
+    max-width: 90%;
+
     padding: 16px 18px;
+
     font-size: 17px;
   }
 
@@ -781,8 +904,8 @@ body.light .footer-text {
   }
 
   .input-wrapper {
-    left: 10px;
-    right: 10px;
+    left: 8px;
+    right: 8px;
     bottom: 8px;
   }
 
@@ -794,234 +917,392 @@ body.light .footer-text {
   .icon-btn {
     width: 48px;
     height: 48px;
+
     font-size: 20px;
   }
 
   .send-btn {
-    width: 52px;
-    height: 52px;
-    font-size: 24px;
+    width: 53px;
+    height: 53px;
+
+    font-size: 25px;
   }
 
   textarea {
     font-size: 16px;
-    padding: 10px 5px;
+    padding: 10px 3px;
   }
 
 }
-    </style>
+
+
+/* VERY SMALL MOBILE */
+
+@media (max-width:390px) {
+
+  .brand-name {
+    font-size: 22px;
+  }
+
+  .brand-sub {
+    font-size: 10px;
+  }
+
+  .theme-btn span:last-child {
+    display: none;
+  }
+
+  .theme-btn {
+    width: 48px;
+    padding: 0;
+    justify-content: center;
+  }
+
+}
+
+</style>
 </head>
+
 
 <body>
 
-  <!-- Futuristic background -->
-  <div class="network-bg"></div>
-  <div class="glow glow1"></div>
-  <div class="glow glow2"></div>
+<!-- BACKGROUND -->
+<div class="network-bg"></div>
+<div class="glow glow1"></div>
+<div class="glow glow2"></div>
 
-  <!-- SIDEBAR -->
-  <aside id="sidebar">
 
-    <div class="side-logo">
-      <div class="robot">🤖</div>
-      <div>
-        <div class="side-title">BaatAI</div>
-        <div class="side-sub">AI Study Assistant</div>
+<!-- SIDEBAR -->
+
+<aside id="sidebar">
+
+  <div class="side-logo">
+
+    <div class="robot">
+      🤖
+    </div>
+
+    <div>
+      <div class="side-title">
+        BaatAI
+      </div>
+
+      <div class="side-sub">
+        AI Study Assistant
       </div>
     </div>
 
-    <button class="new-chat" onclick="newChat()">
-      ＋ New Chat
-    </button>
+  </div>
 
-    <button class="side-btn" onclick="clearChat()">
-      🗑️ Clear History
-    </button>
 
-    <button class="side-btn" onclick="toggleTheme()">
-      ☀️ Light / Dark
-    </button>
+  <button
+    type="button"
+    class="new-chat"
+    onclick="newChat()">
 
-    <div class="history-title">CHATS</div>
+    ＋ New Chat
 
-    <div id="chatHistory"></div>
+  </button>
 
-  </aside>
 
-  <!-- OVERLAY MOBILE -->
-  <div id="overlay" onclick="closeSidebar()"></div>
+  <button
+    type="button"
+    class="side-btn"
+    onclick="clearChat()">
 
-  <!-- MAIN APP -->
-  <main>
+    🗑️ Clear History
 
-    <!-- HEADER -->
-    <header>
+  </button>
 
-      <button class="menu-btn" onclick="openSidebar()">
-        ☰
-      </button>
 
-      <div class="brand">
+  <button
+    type="button"
+    class="side-btn"
+    onclick="toggleTheme()">
 
-        <div class="brand-logo">
-          🤖
-        </div>
+    ☀️ Light / Dark
 
-        <div>
-          <div class="brand-name">BaatAI</div>
-          <div class="brand-sub">AI Study Assistant</div>
-        </div>
+  </button>
 
+
+  <div class="history-title">
+    CHATS
+  </div>
+
+  <div id="chatHistory"></div>
+
+</aside>
+
+
+<!-- OVERLAY -->
+
+<div
+  id="overlay"
+  onclick="closeSidebar()">
+</div>
+
+
+<!-- MAIN -->
+
+<main>
+
+
+<!-- HEADER -->
+
+<header>
+
+  <button
+    type="button"
+    class="menu-btn"
+    onclick="openSidebar()"
+    aria-label="Open menu">
+
+    ☰
+
+  </button>
+
+
+  <div class="brand">
+
+    <div class="brand-logo">
+      🤖
+    </div>
+
+    <div>
+
+      <div class="brand-name">
+        BaatAI
       </div>
 
-      <div class="header-right">
-
-        <button class="theme-btn" onclick="toggleTheme()">
-          <span>☀️</span>
-          <span>Light</span>
-        </button>
-
-        <button class="profile-btn" onclick="toggleProfile()">
-          S
-        </button>
-
-      </div>
-
-      <!-- PROFILE POPUP -->
-      <div id="profilePopup">
-
-        <div class="profile-big">S</div>
-
-        <strong>Guest</strong>
-
-        <small>Public access</small>
-
-        <div class="profile-line"></div>
-
-        <span>Login / Signup coming later</span>
-
-      </div>
-
-    </header>
-
-
-    <!-- CHAT AREA -->
-    <section id="chatArea">
-
-      <div id="welcome">
-
-        <div class="welcome-title">
-          <span></span>
-          Welcome
-          <span></span>
-        </div>
-
-        <div class="welcome-sub">
-          Your AI Study Assistant
-        </div>
-
-      </div>
-
-
-      <!-- MESSAGES -->
-      <div id="messages">
-
-        <div class="message user-message">
-          <div class="bubble">
-            Hi
-          </div>
-        </div>
-
-        <div class="message ai-message">
-
-          <div class="bubble">
-
-            <div class="hello">
-              Hello! 👋 I am your AI Study Buddy.
-            </div>
-
-            <br>
-
-            How can I help you today?
-
-            <br><br>
-
-            Whether you want to understand a tricky
-            school/college concept, learn coding,
-            practice English, create stories or get
-            ideas, I've got your back!
-
-            <br><br>
-
-            <strong>Bataiye, kya padhna hai? 😊</strong>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- INPUT AREA -->
-    <div class="input-wrapper">
-
-      <div class="input-box">
-
-        <!-- IMAGE BUTTON -->
-        <button class="icon-btn camera-btn"
-                onclick="document.getElementById('imageInput').click()"
-                title="Upload image">
-          📷
-        </button>
-
-        <input
-          type="file"
-          id="imageInput"
-          accept="image/*"
-          hidden
-          onchange="handleImage(event)"
-        >
-
-        <!-- MESSAGE -->
-        <textarea
-          id="messageInput"
-          placeholder="Type your message..."
-          rows="1"
-          oninput="autoResize(this)"
-          onkeydown="handleKey(event)"
-        ></textarea>
-
-        <!-- MIC -->
-        <button
-          class="icon-btn mic-btn"
-          onclick="startVoice()"
-          title="Voice input">
-          🎤
-        </button>
-
-        <!-- SEND -->
-        <button
-          class="send-btn"
-          onclick="sendMessage()">
-          ➤
-        </button>
-
-      </div>
-
-      <div id="imagePreview"></div>
-
-      <div class="footer-text">
-        BaatAI can make mistakes. Check important information.
+      <div class="brand-sub">
+        AI Study Assistant
       </div>
 
     </div>
 
-  </main>
+  </div>
 
-  <script src="script.js">
-      let selectedImage = null;
+
+  <div class="header-right">
+
+    <button
+      type="button"
+      class="theme-btn"
+      onclick="toggleTheme()">
+
+      <span>☀️</span>
+      <span>Light</span>
+
+    </button>
+
+
+    <button
+      type="button"
+      class="profile-btn"
+      onclick="toggleProfile()">
+
+      S
+
+    </button>
+
+  </div>
+
+
+  <!-- PROFILE -->
+
+  <div id="profilePopup">
+
+    <div class="profile-big">
+      S
+    </div>
+
+    <strong>
+      Guest
+    </strong>
+
+    <small>
+      Public access
+    </small>
+
+    <div class="profile-line"></div>
+
+    <span>
+      Login / Signup coming later
+    </span>
+
+  </div>
+
+</header>
+
+
+<!-- CHAT -->
+
+<section id="chatArea">
+
+
+  <div id="welcome">
+
+    <div class="welcome-title">
+
+      <span></span>
+
+      Welcome
+
+      <span></span>
+
+    </div>
+
+    <div class="welcome-sub">
+      Your AI Study Assistant
+    </div>
+
+  </div>
+
+
+  <!-- MESSAGES -->
+
+  <div id="messages">
+
+    <div class="message user-message">
+
+      <div class="bubble">
+        Hi
+      </div>
+
+    </div>
+
+
+    <div class="message ai-message">
+
+      <div class="bubble">
+
+        <div class="hello">
+          Hello! 👋 I am your AI Study Buddy.
+        </div>
+
+        <br>
+
+        How can I help you today?
+
+        <br><br>
+
+        Whether you want to understand a tricky
+        school/college concept, learn coding,
+        practice English, create stories or get
+        ideas, I've got your back!
+
+        <br><br>
+
+        <strong>
+          Bataiye, kya padhna hai? 😊
+        </strong>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- INPUT -->
+
+<div class="input-wrapper">
+
+
+  <div class="input-box">
+
+
+    <!-- CAMERA -->
+
+    <button
+      type="button"
+      class="icon-btn camera-btn"
+      onclick="openImagePicker()"
+      title="Upload image"
+      aria-label="Upload image">
+
+      📷
+
+    </button>
+
+
+    <input
+      type="file"
+      id="imageInput"
+      accept="image/*"
+      hidden
+    >
+
+
+    <!-- MESSAGE -->
+
+    <textarea
+      id="messageInput"
+      placeholder="Type your message..."
+      rows="1"
+      oninput="autoResize(this)"
+      onkeydown="handleKey(event)">
+    </textarea>
+
+
+    <!-- MIC -->
+
+    <button
+      type="button"
+      class="icon-btn mic-btn"
+      onclick="startVoice()"
+      title="Voice input"
+      aria-label="Voice input">
+
+      🎤
+
+    </button>
+
+
+    <!-- SEND -->
+
+    <button
+      type="button"
+      class="send-btn"
+      onclick="sendMessage()"
+      aria-label="Send message">
+
+      ➤
+
+    </button>
+
+  </div>
+
+
+  <!-- IMAGE PREVIEW -->
+
+  <div id="imagePreview"></div>
+
+
+  <div class="footer-text">
+    BaatAI can make mistakes. Check important information.
+  </div>
+
+</div>
+
+
+</main>
+
+
+<script>
+
+/* =====================================
+   BAATAI JAVASCRIPT
+   ===================================== */
+
+
+/* =========================
+   VARIABLES
+========================= */
+
+let selectedImage = null;
 
 
 /* =========================
@@ -1029,13 +1310,30 @@ body.light .footer-text {
 ========================= */
 
 function openSidebar() {
-  document.getElementById("sidebar").classList.add("open");
-  document.getElementById("overlay").classList.add("show");
+
+  const sidebar =
+    document.getElementById("sidebar");
+
+  const overlay =
+    document.getElementById("overlay");
+
+  sidebar.classList.add("open");
+
+  overlay.classList.add("show");
 }
 
+
 function closeSidebar() {
-  document.getElementById("sidebar").classList.remove("open");
-  document.getElementById("overlay").classList.remove("show");
+
+  const sidebar =
+    document.getElementById("sidebar");
+
+  const overlay =
+    document.getElementById("overlay");
+
+  sidebar.classList.remove("open");
+
+  overlay.classList.remove("show");
 }
 
 
@@ -1044,9 +1342,11 @@ function closeSidebar() {
 ========================= */
 
 function toggleProfile() {
-  document
-    .getElementById("profilePopup")
-    .classList.toggle("show");
+
+  const popup =
+    document.getElementById("profilePopup");
+
+  popup.classList.toggle("show");
 }
 
 
@@ -1058,17 +1358,24 @@ function toggleTheme() {
 
   document.body.classList.toggle("light");
 
-  const light =
+  const isLight =
     document.body.classList.contains("light");
 
   localStorage.setItem(
     "baatai-theme",
-    light ? "light" : "dark"
+    isLight ? "light" : "dark"
   );
 }
 
-if (localStorage.getItem("baatai-theme") === "light") {
+
+/* LOAD THEME */
+
+if (
+  localStorage.getItem("baatai-theme") === "light"
+) {
+
   document.body.classList.add("light");
+
 }
 
 
@@ -1082,47 +1389,85 @@ function autoResize(element) {
 
   element.style.height =
     Math.min(element.scrollHeight, 130) + "px";
+
 }
 
 
 /* =========================
-   ENTER KEY
+   ENTER TO SEND
 ========================= */
 
 function handleKey(event) {
 
-  if (event.key === "Enter" && !event.shiftKey) {
+  if (
+    event.key === "Enter" &&
+    !event.shiftKey
+  ) {
 
     event.preventDefault();
 
     sendMessage();
+
   }
+
 }
 
 
 /* =========================
-   IMAGE
+   IMAGE PICKER
 ========================= */
+
+function openImagePicker() {
+
+  document
+    .getElementById("imageInput")
+    .click();
+
+}
+
+
+/* IMAGE SELECTED */
+
+document
+  .getElementById("imageInput")
+  .addEventListener(
+    "change",
+    handleImage
+  );
+
 
 function handleImage(event) {
 
-  const file = event.target.files[0];
+  const file =
+    event.target.files[0];
 
-  if (!file) return;
+  if (!file) {
+    return;
+  }
 
   selectedImage = file;
 
-  const reader = new FileReader();
+  const reader =
+    new FileReader();
 
-  reader.onload = function(e) {
+  reader.onload =
+    function(event) {
 
-    document.getElementById("imagePreview").innerHTML = `
-      <img src="${e.target.result}" alt="Selected image">
-    `;
+      document.getElementById(
+        "imagePreview"
+      ).innerHTML = `
 
-  };
+        <img
+          src="${event.target.result}"
+          alt="Selected image"
+        >
+
+      `;
+
+    };
 
   reader.readAsDataURL(file);
+
 }
 
 
@@ -1140,33 +1485,82 @@ function addMessage(text, type) {
 
   div.className =
     "message " +
-    (type === "user"
-      ? "user-message"
-      : "ai-message");
+    (
+      type === "user"
+        ? "user-message"
+        : "ai-message"
+    );
 
-  div.innerHTML = `
-    <div class="bubble">
-      ${formatText(text)}
-    </div>
-  `;
+  const bubble =
+    document.createElement("div");
+
+  bubble.className =
+    "bubble";
+
+  bubble.innerHTML =
+    formatText(text);
+
+  div.appendChild(bubble);
 
   messages.appendChild(div);
 
   scrollBottom();
+
 }
 
 
 /* =========================
-   FORMAT TEXT
+   SAFE TEXT
 ========================= */
 
 function formatText(text) {
 
-  return text
+  if (!text) {
+    return "";
+  }
+
+  return String(text)
+
     .replace(/&/g, "&amp;")
+
     .replace(/</g, "&lt;")
+
     .replace(/>/g, "&gt;")
+
     .replace(/\n/g, "<br>");
+
+}
+
+
+/* =========================
+   FILE → BASE64
+========================= */
+
+function fileToBase64(file) {
+
+  return new Promise(
+    function(resolve, reject) {
+
+      const reader =
+        new FileReader();
+
+      reader.onload =
+        function() {
+
+          resolve(
+            reader.result
+          );
+
+        };
+
+      reader.onerror =
+        reject;
+
+      reader.readAsDataURL(file);
+
+    }
+  );
+
 }
 
 
@@ -1177,104 +1571,176 @@ function formatText(text) {
 async function sendMessage() {
 
   const input =
-    document.getElementById("messageInput");
+    document.getElementById(
+      "messageInput"
+    );
 
   const message =
     input.value.trim();
 
-  if (!message && !selectedImage) {
+
+  if (
+    !message &&
+    !selectedImage
+  ) {
+
     return;
+
   }
 
 
   /* USER MESSAGE */
 
   if (message) {
-    addMessage(message, "user");
+
+    addMessage(
+      message,
+      "user"
+    );
+
   }
 
 
+  /* RESET INPUT */
+
   input.value = "";
-  input.style.height = "auto";
+
+  input.style.height =
+    "auto";
 
 
   /* IMAGE */
 
   let imageBase64 = null;
 
+
   if (selectedImage) {
 
-    imageBase64 =
-      await fileToBase64(selectedImage);
+    try {
 
-    addMessage("📷 Image attached", "user");
+      imageBase64 =
+        await fileToBase64(
+          selectedImage
+        );
+
+      addMessage(
+        "📷 Image attached",
+        "user"
+      );
+
+    } catch (error) {
+
+      console.error(
+        "Image error:",
+        error
+      );
+
+    }
 
     selectedImage = null;
 
     document.getElementById(
       "imagePreview"
     ).innerHTML = "";
+
+    document.getElementById(
+      "imageInput"
+    ).value = "";
+
   }
 
 
   /* THINKING */
 
   const messages =
-    document.getElementById("messages");
+    document.getElementById(
+      "messages"
+    );
+
 
   const thinking =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
+
 
   thinking.className =
     "message ai-message";
 
-  thinking.id = "thinking";
+
+  thinking.id =
+    "thinking";
+
 
   thinking.innerHTML = `
+
     <div class="bubble">
-      <span class="thinking-text">
-        BaatAI is thinking...
-      </span>
+
+      BaatAI is thinking... 🤖
+
     </div>
+
   `;
 
-  messages.appendChild(thinking);
+
+  messages.appendChild(
+    thinking
+  );
+
 
   scrollBottom();
 
 
-  /* API */
+  /* API REQUEST */
 
   try {
 
     const response =
-      await fetch("/api/chat", {
+      await fetch(
+        "/api/chat",
+        {
 
-        method: "POST",
+          method: "POST",
 
-        headers: {
-          "Content-Type": "application/json"
-        },
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
 
-        body: JSON.stringify({
+          body: JSON.stringify({
 
-          message: message,
+            message:
+              message,
 
-          image: imageBase64
+            image:
+              imageBase64
 
-        })
+          })
 
-      });
+        }
+      );
 
 
     const data =
       await response.json();
 
 
-    document.getElementById(
-      "thinking"
-    )?.remove();
+    /* REMOVE THINKING */
 
+    const thinkingElement =
+      document.getElementById(
+        "thinking"
+      );
+
+
+    if (thinkingElement) {
+
+      thinkingElement.remove();
+
+    }
+
+
+    /* AI RESPONSE */
 
     if (data.reply) {
 
@@ -1286,51 +1752,58 @@ async function sendMessage() {
     } else {
 
       addMessage(
-        "Sorry, mujhe response nahi mila. Please try again.",
+
+        data.error ||
+        "Sorry, mujhe response nahi mila.",
+
         "ai"
+
       );
 
     }
 
+
   } catch (error) {
 
-    console.error(error);
+    console.error(
+      "Chat error:",
+      error
+    );
 
-    document.getElementById(
-      "thinking"
-    )?.remove();
+
+    const thinkingElement =
+      document.getElementById(
+        "thinking"
+      );
+
+
+    if (thinkingElement) {
+
+      thinkingElement.remove();
+
+    }
+
 
     addMessage(
-      "⚠️ Server se connection nahi ho pa raha. Please check your API/server.",
+
+      "⚠️ Server se connection nahi ho pa raha. Please Render server check karein.",
+
       "ai"
+
     );
+
   }
 
 
-  saveHistory(message);
-}
+  /* HISTORY */
 
+  if (message) {
 
-/* =========================
-   BASE64
-========================= */
+    saveHistory(
+      message
+    );
 
-function fileToBase64(file) {
-
-  return new Promise((resolve, reject) => {
-
-    const reader =
-      new FileReader();
-
-    reader.onload =
-      () => resolve(reader.result);
-
-    reader.onerror =
-      reject;
-
-    reader.readAsDataURL(file);
-
-  });
+  }
 
 }
 
@@ -1342,14 +1815,21 @@ function fileToBase64(file) {
 function scrollBottom() {
 
   const area =
-    document.getElementById("chatArea");
+    document.getElementById(
+      "chatArea"
+    );
 
-  setTimeout(() => {
 
-    area.scrollTop =
-      area.scrollHeight;
+  setTimeout(
+    function() {
 
-  }, 50);
+      area.scrollTop =
+        area.scrollHeight;
+
+    },
+    50
+  );
+
 }
 
 
@@ -1363,70 +1843,125 @@ function newChat() {
     "messages"
   ).innerHTML = "";
 
+
   document.getElementById(
     "messageInput"
   ).value = "";
 
-  selectedImage = null;
+
+  document.getElementById(
+    "messageInput"
+  ).style.height =
+    "auto";
+
+
+  selectedImage =
+    null;
+
 
   document.getElementById(
     "imagePreview"
   ).innerHTML = "";
 
+
+  document.getElementById(
+    "imageInput"
+  ).value = "";
+
+
   closeSidebar();
+
 }
 
 
 /* =========================
-   CLEAR CHAT
+   CLEAR HISTORY
 ========================= */
 
 function clearChat() {
 
-  if (
-    !confirm(
-      "Kya aap chat clear karna chahte hain?"
-    )
-  ) {
+  const answer =
+    confirm(
+      "Kya aap chat history clear karna chahte hain?"
+    );
+
+
+  if (!answer) {
     return;
   }
 
-  newChat();
 
   localStorage.removeItem(
     "baatai-history"
   );
+
+
+  document.getElementById(
+    "chatHistory"
+  ).innerHTML = "";
+
+
+  newChat();
+
 }
 
 
 /* =========================
-   HISTORY
+   SAVE HISTORY
 ========================= */
 
 function saveHistory(message) {
 
-  if (!message) return;
+  if (!message) {
+    return;
+  }
 
-  let history =
-    JSON.parse(
-      localStorage.getItem(
-        "baatai-history"
-      ) || "[]"
-    );
 
-  history.unshift(message);
+  let history;
+
+
+  try {
+
+    history =
+      JSON.parse(
+        localStorage.getItem(
+          "baatai-history"
+        ) || "[]"
+      );
+
+  } catch {
+
+    history = [];
+
+  }
+
+
+  history.unshift(
+    message
+  );
+
 
   history =
-    history.slice(0, 10);
+    history.slice(
+      0,
+      10
+    );
+
 
   localStorage.setItem(
     "baatai-history",
     JSON.stringify(history)
   );
 
+
   renderHistory();
+
 }
 
+
+/* =========================
+   RENDER HISTORY
+========================= */
 
 function renderHistory() {
 
@@ -1435,38 +1970,67 @@ function renderHistory() {
       "chatHistory"
     );
 
-  let history =
-    JSON.parse(
-      localStorage.getItem(
-        "baatai-history"
-      ) || "[]"
-    );
 
   box.innerHTML = "";
 
-  history.forEach(item => {
 
-    const div =
-      document.createElement("div");
+  let history;
 
-    div.className =
-      "history-item";
 
-    div.textContent =
-      "💬 " +
-      item.substring(0, 28) +
-      (item.length > 28 ? "..." : "");
+  try {
 
-    box.appendChild(div);
+    history =
+      JSON.parse(
+        localStorage.getItem(
+          "baatai-history"
+        ) || "[]"
+      );
 
-  });
+  } catch {
+
+    history = [];
+
+  }
+
+
+  history.forEach(
+    function(item) {
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+
+      div.className =
+        "history-item";
+
+
+      div.textContent =
+        "💬 " +
+        item.substring(
+          0,
+          30
+        ) +
+        (
+          item.length > 30
+            ? "..."
+            : ""
+        );
+
+
+      box.appendChild(
+        div
+      );
+
+    }
+  );
+
 }
-
-renderHistory();
 
 
 /* =========================
-   VOICE INPUT
+   VOICE
 ========================= */
 
 function startVoice() {
@@ -1475,6 +2039,7 @@ function startVoice() {
     window.SpeechRecognition ||
     window.webkitSpeechRecognition;
 
+
   if (!SpeechRecognition) {
 
     alert(
@@ -1482,57 +2047,144 @@ function startVoice() {
     );
 
     return;
+
   }
+
 
   const recognition =
     new SpeechRecognition();
 
-  recognition.lang = "hi-IN";
 
-  recognition.continuous = false;
-
-  recognition.interimResults = false;
+  recognition.lang =
+    "hi-IN";
 
 
-  recognition.onstart = function() {
+  recognition.continuous =
+    false;
 
-    document.querySelector(
-      ".mic-btn"
-    ).style.borderColor =
-      "#00eaff";
-  };
+
+  recognition.interimResults =
+    false;
+
+
+  recognition.onstart =
+    function() {
+
+      const mic =
+        document.querySelector(
+          ".mic-btn"
+        );
+
+      mic.style.borderColor =
+        "#00eaff";
+
+      mic.style.boxShadow =
+        "0 0 20px rgba(0,234,255,.5)";
+
+    };
 
 
   recognition.onresult =
     function(event) {
 
-      const text =
+      const spokenText =
         event.results[0][0].transcript;
+
 
       const input =
         document.getElementById(
           "messageInput"
         );
 
-      input.value += text;
 
-      autoResize(input);
+      input.value +=
+        spokenText;
+
+
+      autoResize(
+        input
+      );
+
+    };
+
+
+  recognition.onerror =
+    function(event) {
+
+      console.log(
+        "Voice error:",
+        event.error
+      );
+
     };
 
 
   recognition.onend =
     function() {
 
-      document.querySelector(
-        ".mic-btn"
-      ).style.borderColor =
+      const mic =
+        document.querySelector(
+          ".mic-btn"
+        );
+
+
+      mic.style.borderColor =
         "";
+
+      mic.style.boxShadow =
+        "";
+
     };
 
 
   recognition.start();
+
 }
-  </script>
+
+
+/* =========================
+   INITIALIZE
+========================= */
+
+renderHistory();
+
+
+/* =========================
+   CLOSE PROFILE
+   WHEN CLICKING OUTSIDE
+========================= */
+
+document.addEventListener(
+  "click",
+  function(event) {
+
+    const popup =
+      document.getElementById(
+        "profilePopup"
+      );
+
+    const profileButton =
+      document.querySelector(
+        ".profile-btn"
+      );
+
+
+    if (
+      popup.classList.contains("show") &&
+      !popup.contains(event.target) &&
+      !profileButton.contains(event.target)
+    ) {
+
+      popup.classList.remove(
+        "show"
+      );
+
+    }
+
+  }
+);
+
+</script>
 
 </body>
 </html>
